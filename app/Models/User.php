@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Panel;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Filament\Models\Contracts\HasName;
@@ -11,7 +12,7 @@ use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements HasName
+class User extends Authenticatable implements HasName, FilamentUser
 {
     use HasFactory, Notifiable, HasApiTokens;
 
@@ -68,5 +69,10 @@ class User extends Authenticatable implements HasName
         static::creating(function ($model) {
             $model->uuid = Str::uuid();
         });
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return ($this->user_type == 1) ? true : false;
     }
 }
