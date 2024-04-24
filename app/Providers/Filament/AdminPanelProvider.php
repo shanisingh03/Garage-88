@@ -43,10 +43,11 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 // Widgets\FilamentInfoWidget::class,
             ])
-            ->plugin(
+            ->plugins([
                 FilamentSpatieRolesPermissionsPlugin::make(), 
-                FilamentSpatieLaravelHealthPlugin::make()->usingPage(HealthCheckResults::class)
-            )
+                FilamentSpatieLaravelHealthPlugin::make()->usingPage(HealthCheckResults::class),
+                \BezhanSalleh\FilamentExceptions\FilamentExceptionsPlugin::make()
+            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
