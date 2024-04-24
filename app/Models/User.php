@@ -32,6 +32,7 @@ class User extends Authenticatable implements HasName, FilamentUser
         'user_type',
         'role_id',
         'status',
+        'gst_number'
     ];
 
     /**

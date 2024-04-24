@@ -46,6 +46,7 @@ class UserResource extends Resource
                 ->revealable()
                 ->autocomplete(false),
                 TextInput::make('mobile_number')->tel(),
+                TextInput::make('gst_number'),
                 Select::make('user_type')
                 ->options([
                     '1' => 'Admin',
@@ -60,6 +61,7 @@ class UserResource extends Resource
                     '3' => 'Customer',
                     '4' => 'Garage',
                     '5' => 'Supplier',
+                    '6' => 'Garage Supervisior',
                 ]),
             ]);
     }
@@ -68,10 +70,11 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('first_name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('last_name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('mobile_number')->sortable()->searchable(),
+                TextColumn::make('first_name')->sortable()->searchable(),
+                TextColumn::make('last_name')->sortable()->searchable(),
+                TextColumn::make('email')->sortable()->searchable(),
+                TextColumn::make('mobile_number')->sortable()->searchable(),
+                TextColumn::make('gst_number')->sortable()->searchable(),
                 TextColumn::make('user_type')
                 ->badge()
                 ->formatStateUsing(fn (string $state): string => match ($state) {
