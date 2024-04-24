@@ -6,7 +6,9 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
+use Filament\Navigation\MenuItem;
 use Filament\Support\Colors\Color;
+use App\Filament\Pages\App\Profile;
 use App\Filament\Pages\HealthCheckResults;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
@@ -50,6 +52,12 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->resources([
                 config('filament-logger.activity_resource')
+            ])
+            ->userMenuItems([
+                'profile' => MenuItem::make()
+                    ->label('Profile')
+                    ->icon('heroicon-o-user-circle')
+                    ->url(static fn (): string => route(Profile::getRouteName(panel: 'admin'))),
             ])
             ->middleware([
                 EncryptCookies::class,
