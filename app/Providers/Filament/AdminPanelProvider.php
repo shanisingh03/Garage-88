@@ -48,6 +48,9 @@ class AdminPanelProvider extends PanelProvider
                 FilamentSpatieLaravelHealthPlugin::make()->usingPage(HealthCheckResults::class),
                 \BezhanSalleh\FilamentExceptions\FilamentExceptionsPlugin::make()
             ])
+            ->resources([
+                config('filament-logger.activity_resource')
+            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

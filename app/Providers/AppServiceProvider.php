@@ -9,8 +9,15 @@ use Spatie\Health\Facades\Health;
 use Spatie\Health\Checks\Checks\OptimizedAppCheck;
 use Spatie\Health\Checks\Checks\DebugModeCheck;
 use Spatie\Health\Checks\Checks\EnvironmentCheck;
+use App\Policies\ActivityPolicy;
+use Spatie\Activitylog\Models\Activity;
 class AppServiceProvider extends ServiceProvider
 {
+    protected $policies = [
+        // Update `Activity::class` with the one defined in `config/activitylog.php`
+        Activity::class => ActivityPolicy::class,
+    ];
+
     /**
      * Register any application services.
      */
@@ -24,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        
         Health::checks([
             OptimizedAppCheck::new(),
             DebugModeCheck::new(),
