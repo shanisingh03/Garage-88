@@ -96,11 +96,11 @@ class CarModelVariantResource extends Resource
                 TextColumn::make('carModel.maker.name')->label('Car Maker')->searchable()->sortable(),
                 TextColumn::make('carModel.name')->label('Car Model')->searchable()->sortable(),
                 TextColumn::make('name')->label('Variant')->searchable()->sortable(),
-                TextColumn::make('engine_liters')->searchable()->sortable(),
+                // TextColumn::make('engine_liters')->searchable()->sortable(),
                 TextColumn::make('engine_type')->searchable()->sortable(),
                 TextColumn::make('start_date')->label('Start Year')->date('Y')->searchable()->sortable(),
                 TextColumn::make('end_date')->label('End Year')->date('Y')->default(date('Y'))->searchable()->sortable(),
-                TextColumn::make('motor_power')->searchable()->sortable(),
+                // TextColumn::make('motor_power')->searchable()->sortable(),
                 TextColumn::make('engine_codes')->searchable()->sortable(),
                 // TextColumn::make('body_type')->searchable()->sortable(),
             ])

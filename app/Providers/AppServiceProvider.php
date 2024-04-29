@@ -51,6 +51,10 @@ class AppServiceProvider extends ServiceProvider
                     ->label('Car Make & Model')
                     ->icon('heroicon-o-lifebuoy')
                     ->collapsed(),
+                NavigationGroup::make()
+                    ->label('Category')
+                    ->icon('heroicon-o-tag')
+                    ->collapsed(),
             ]);
         });
     }
