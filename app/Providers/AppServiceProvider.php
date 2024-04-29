@@ -3,14 +3,17 @@
 namespace App\Providers;
 
 use App\Models\User;
+use Filament\Facades\Filament;
+use App\Policies\ActivityPolicy;
+use Spatie\Health\Facades\Health;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
-use Spatie\Health\Facades\Health;
-use Spatie\Health\Checks\Checks\OptimizedAppCheck;
+use Spatie\Activitylog\Models\Activity;
+use Filament\Navigation\NavigationGroup;
 use Spatie\Health\Checks\Checks\DebugModeCheck;
 use Spatie\Health\Checks\Checks\EnvironmentCheck;
-use App\Policies\ActivityPolicy;
-use Spatie\Activitylog\Models\Activity;
+use Spatie\Health\Checks\Checks\OptimizedAppCheck;
+
 class AppServiceProvider extends ServiceProvider
 {
     protected $policies = [
@@ -40,6 +43,15 @@ class AppServiceProvider extends ServiceProvider
 
         Gate::before(function (User $user, string $ability) {
             return $user->isSuperAdmin() ? true: null;
+        });
+
+        Filament::serving(function () {
+            Filament::registerNavigationGroups([
+                NavigationGroup::make()
+                    ->label('Car Make & Model')
+                    ->icon('heroicon-o-lifebuoy')
+                    ->collapsed(),
+            ]);
         });
     }
 }

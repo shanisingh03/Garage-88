@@ -16,14 +16,14 @@ class CarMaker extends Model
         'status'
     ];
 
-    // protected static function boot()
-    // {
-    //     parent::boot();
+    protected static function boot()
+    {
+        parent::boot();
 
-    //     static::creating(function ($model) {
-    //         $model->slug = Str::slug($model->name);
-    //     });
-    // }
+        static::creating(function ($model) {
+            $model->slug = Str::slug($model->name);
+        });
+    }
 
     public function models()
     {
