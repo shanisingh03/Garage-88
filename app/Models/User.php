@@ -32,7 +32,10 @@ class User extends Authenticatable implements HasName, FilamentUser
         'user_type',
         'role_id',
         'status',
-        'gst_number'
+        'gst_number',
+        'business_name',
+        'otp',
+        'mobile_verified_at'
     ];
 
     /**
@@ -57,7 +60,6 @@ class User extends Authenticatable implements HasName, FilamentUser
             'password' => 'hashed',
         ];
     }
-    
 
     public function getFilamentName(): string
     {
