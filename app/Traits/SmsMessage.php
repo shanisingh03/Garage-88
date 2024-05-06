@@ -8,13 +8,11 @@ use Illuminate\Support\Facades\Http;
 class SmsMessage
 {
 
-    protected string $user;
-    protected string $password;
+    protected string $apiKey;
     protected string $to;
     protected string $from;
     protected string $baseUrl;
-    protected array $lines;
-    protected string $dryrun = 'no';
+    protected array  $lines;
 
     /**
      * SmsMessage constructor.
@@ -23,12 +21,9 @@ class SmsMessage
     public function __construct($lines = [])
     {
         $this->lines = $lines;
-
-        // Pull in config from the config/services.php file.
-        $this->from = config('services.elks.from');
-        $this->baseUrl = config('services.elks.base_url');
-        $this->user = config('services.elks.user');
-        $this->password = config('services.elks.password');
+        $this->apiKey = config('services.sms.key');
+        $this->from = "TXTLCL";
+        $this->to = "";
     }
 
     public function line($line = ''): self
@@ -58,20 +53,17 @@ class SmsMessage
             throw new \Exception('SMS not correct.');
         }
 
-        return Http::baseUrl($this->baseUrl)->withBasicAuth($this->user, $this->password)
-            ->asForm()
-            ->post('sms', [
-                'from' => $this->from,
-                'to' => $this->to,
-                'message' => $this->lines,
-                'dryryn' => $this->dryrun
-            ]);
+        $data = [
+            'apikey' => $this->apiKey,
+            'numbers' => $this->to,
+            'sender' => $this->from,
+            'message' => $this->lines,
+        ];
+
+        $response =  Http::post('https://api.textlocal.in/send/', [
+            'form_params' => $data,
+        ]);
     }
 
-    public function dryrun($dry = 'yes'): self
-    {
-        $this->dryrun = $dry;
-
-        return $this;
-    }
+    
 }

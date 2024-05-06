@@ -23,6 +23,10 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'sms' => [
+        'key' => env('TXT_LCL_API_KEY'),
+        'user_name' => env('TXT_LCL_USERNAME'),
+    ],
 
     'slack' => [
         'notifications' => [
