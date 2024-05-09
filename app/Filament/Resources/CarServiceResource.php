@@ -27,6 +27,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CarServiceResource\Pages;
 use App\Filament\Resources\CarServiceResource\RelationManagers;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Database\Eloquent\Model;
 
 class CarServiceResource extends Resource
 {
@@ -97,8 +100,18 @@ class CarServiceResource extends Resource
                 ActionGroup::make([
                     ViewAction::make(),
                     EditAction::make(),
-                    DeleteAction::make()
+                    DeleteAction::make(),                   
                 ]),
+                Tables\Actions\Action::make('pdf')
+                    ->label('PDF')
+                    ->color('success') 
+                    ->action(function (Model $record) {
+                        return response()->streamDownload(function () use ($record) {
+                            echo Pdf::loadHtml(
+                                Blade::render('pdf', ['record' => $record])
+                            )->stream();
+                        }, $record->number . '.pdf', ['Content-Type' => 'application/pdf']);
+                }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
