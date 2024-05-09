@@ -11,25 +11,27 @@ use App\Models\CarService;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use App\Models\ServiceCategory;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Resources\Resource;
 use App\Models\ServiceSubCategory;
 use Filament\Forms\Components\Select;
+use Illuminate\Support\Facades\Blade;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
+use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CarServiceResource\Pages;
 use App\Filament\Resources\CarServiceResource\RelationManagers;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Database\Eloquent\Model;
 
 class CarServiceResource extends Resource
 {
@@ -102,20 +104,18 @@ class CarServiceResource extends Resource
                     EditAction::make(),
                     DeleteAction::make(),                   
                 ]),
-                Tables\Actions\Action::make('pdf')
-                    ->label('PDF')
-                    ->color('success') 
-                    ->action(function (Model $record) {
-                        return response()->streamDownload(function () use ($record) {
-                            echo Pdf::loadHtml(
-                                Blade::render('pdf', ['record' => $record])
-                            )->stream();
-                        }, $record->number . '.pdf', ['Content-Type' => 'application/pdf']);
-                }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    ExportAction::make()
+                    ->label('Export CSV') 
+                    ->exports([
+                        ExcelExport::make()
+                            ->fromTable()
+                            ->withFilename(fn ($resource) => $resource::getModelLabel() . '-' . date('Y-m-d'))
+                            ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)                    
+                    ]),
                 ]),
             ]);
     }
