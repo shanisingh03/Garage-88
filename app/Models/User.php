@@ -79,4 +79,9 @@ class User extends Authenticatable implements HasName, FilamentUser
     {
         return ($this->user_type == 1) ? true : false;
     }
+
+    public function userType()
+    {
+        return $this->hasOne(UserType::class, 'id', 'user_type');
+    }
 }

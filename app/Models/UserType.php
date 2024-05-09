@@ -10,4 +10,9 @@ class UserType extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'status'];
+
+    public function active()
+    {
+        return $this->where('status', 1);
+    }
 }

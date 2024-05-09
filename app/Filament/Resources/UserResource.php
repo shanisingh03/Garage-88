@@ -68,15 +68,7 @@ class UserResource extends Resource
                         '3' => 'Garage',
                         '4' => 'Supplier'
                     ]),
-                    Select::make('role_id')->label('Role')
-                    ->options([
-                        '1' => 'Super Admin',
-                        '2' => 'Employee',
-                        '3' => 'Customer',
-                        '4' => 'Garage',
-                        '5' => 'Supplier',
-                        '6' => 'Garage Supervisior',
-                    ]),
+                    Select::make('roles')->relationship('roles', 'name')
                 ]),
 
                 // Section For Garage Information
@@ -92,26 +84,24 @@ class UserResource extends Resource
                 ->formatStateUsing(function ($state, User $user) {
                     return $user->first_name . ' ' . $user->last_name;
                 })->sortable()->searchable(),
-                // TextColumn::make('first_name')->sortable()->searchable(),
-                // TextColumn::make('last_name')->sortable()->searchable(),
                 TextColumn::make('business_name')->sortable()->searchable()->default('N/A'),
                 TextColumn::make('email')->sortable()->searchable(),
                 TextColumn::make('mobile_number')->sortable()->searchable(),
-                // TextColumn::make('gst_number')->sortable()->searchable(),
-                TextColumn::make('user_type')
+                TextColumn::make('userType.name')
+                ->label('User Type')
                 ->badge()
-                ->formatStateUsing(fn (string $state): string => match ($state) {
-                    '1' => 'Admin',
-                    '2' => 'Customer',
-                    '3' => 'Garage',
-                    '4' => 'Supplier'
-                })
                 ->color(fn (string $state): string => match ($state) {
-                    '1' => 'gray',
-                    '2' => 'warning',
-                    '3' => 'success',
-                    '4' => 'danger',
-                })->sortable()->searchable(),
+                    'Admin' => 'gray',
+                    'Customer' => 'warning',
+                    'Garage' => 'success',
+                    'Supplier' => 'danger',
+                })
+                ->sortable()->searchable(),
+                TextColumn::make('roles.name')
+                ->label('Role')
+                ->badge()
+                ->searchable()
+                ->sortable(),
                 IconColumn::make('status')
                 ->boolean()
                 ->trueIcon('heroicon-o-check-badge')
@@ -121,12 +111,8 @@ class UserResource extends Resource
             ->filters([
                 Tables\Filters\Filter::make('verified')
                 ->query(fn (Builder $query): Builder => $query->whereNotNull('email_verified_at')),
-                SelectFilter::make('user_type')->options([
-                    '1' => 'Admin',
-                    '2' => 'Customer',
-                    '3' => 'Garage',
-                    '4' => 'Supplier',
-                ])->label('User Type'),
+                SelectFilter::make('userType')->relationship('userType', 'name')->label('User Type'),
+                SelectFilter::make('roles')->relationship('roles', 'name')->label('Role'),
                 SelectFilter::make('status')->options([
                     '0' => 'Inactive',
                     '1' => 'Active',
