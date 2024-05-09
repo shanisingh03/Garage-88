@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
@@ -38,31 +39,47 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('first_name')->required(),
-                TextInput::make('last_name')->required(),
-                TextInput::make('email')->email()->required()->autocomplete(false),
-                TextInput::make('password')
-                ->password()
-                ->revealable()
-                ->autocomplete(false),
-                TextInput::make('mobile_number')->tel(),
-                TextInput::make('gst_number'),
-                Select::make('user_type')
-                ->options([
-                    '1' => 'Admin',
-                    '2' => 'Customer',
-                    '3' => 'Garage',
-                    '4' => 'Supplier',
+                Section::make('User Information')
+                ->description("Name, Email, Mobile, Business Name, GST, User Type & Role.")
+                ->columns(2)
+                ->collapsible()
+                ->schema([
+                    TextInput::make('first_name')->required(),
+                    TextInput::make('last_name')->required(),
+                    TextInput::make('business_name')->hidden(function (callable $get) {
+                        if (($get('user_type') == 3) || ($get('user_type') == 4)) {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    }),
+                    TextInput::make('email')->email()->required()->autocomplete(false),
+                    TextInput::make('password')
+                    ->password()
+                    ->revealable()
+                    ->autocomplete(false)
+                    ->hiddenOn('edit'),
+                    TextInput::make('mobile_number')->tel(),
+                    TextInput::make('gst_number'),
+                    Select::make('user_type')
+                    ->options([
+                        '1' => 'Admin',
+                        '2' => 'Customer',
+                        '3' => 'Garage',
+                        '4' => 'Supplier'
+                    ]),
+                    Select::make('role_id')->label('Role')
+                    ->options([
+                        '1' => 'Super Admin',
+                        '2' => 'Employee',
+                        '3' => 'Customer',
+                        '4' => 'Garage',
+                        '5' => 'Supplier',
+                        '6' => 'Garage Supervisior',
+                    ]),
                 ]),
-                Select::make('role_id')->label('Role')
-                ->options([
-                    '1' => 'Super Admin',
-                    '2' => 'Employee',
-                    '3' => 'Customer',
-                    '4' => 'Garage',
-                    '5' => 'Supplier',
-                    '6' => 'Garage Supervisior',
-                ]),
+
+                // Section For Garage Information
             ]);
     }
 
@@ -70,18 +87,24 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('first_name')->sortable()->searchable(),
-                TextColumn::make('last_name')->sortable()->searchable(),
+                TextColumn::make('first_name')
+                ->label('Name')
+                ->formatStateUsing(function ($state, User $user) {
+                    return $user->first_name . ' ' . $user->last_name;
+                })->sortable()->searchable(),
+                // TextColumn::make('first_name')->sortable()->searchable(),
+                // TextColumn::make('last_name')->sortable()->searchable(),
+                TextColumn::make('business_name')->sortable()->searchable()->default('N/A'),
                 TextColumn::make('email')->sortable()->searchable(),
                 TextColumn::make('mobile_number')->sortable()->searchable(),
-                TextColumn::make('gst_number')->sortable()->searchable(),
+                // TextColumn::make('gst_number')->sortable()->searchable(),
                 TextColumn::make('user_type')
                 ->badge()
                 ->formatStateUsing(fn (string $state): string => match ($state) {
                     '1' => 'Admin',
                     '2' => 'Customer',
                     '3' => 'Garage',
-                    '4' => 'Supplier',
+                    '4' => 'Supplier'
                 })
                 ->color(fn (string $state): string => match ($state) {
                     '1' => 'gray',
@@ -90,10 +113,9 @@ class UserResource extends Resource
                     '4' => 'danger',
                 })->sortable()->searchable(),
                 IconColumn::make('status')
-                ->icon(fn (string $state): string => match ($state) {
-                    '0' => 'heroicon-m-exclamation-triangle',
-                    '1' => 'heroicon-o-check-badge',
-                })->sortable()->searchable(),
+                ->boolean()
+                ->trueIcon('heroicon-o-check-badge')
+                ->falseIcon('heroicon-o-x-mark')
                 
             ])
             ->filters([
@@ -111,8 +133,32 @@ class UserResource extends Resource
                 ])->label('Status'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                ActionGroup::make([
+                    Tables\Actions\EditAction::make()
+                    ->visible(function (User $user) {
+                        if (auth()->user()->user_type == 1) {
+                            return true;
+                        }else {
+                            if ($user->user_type == 1) {
+                                return false;
+                            } else {
+                                return true;
+                            }
+                        }
+                    }),
+                    Tables\Actions\DeleteAction::make()
+                    ->visible(function (User $user) {
+                        if (auth()->user()->user_type == 1) {
+                            return true;
+                        }else {
+                            if ($user->user_type == 1) {
+                                return false;
+                            } else {
+                                return true;
+                            }
+                        }
+                    }),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
