@@ -32,6 +32,7 @@ use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CarServiceResource\Pages;
 use App\Filament\Resources\CarServiceResource\RelationManagers;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class CarServiceResource extends Resource
 {
@@ -108,14 +109,7 @@ class CarServiceResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-                    ExportAction::make()
-                    ->label('Export CSV') 
-                    ->exports([
-                        ExcelExport::make()
-                            ->fromTable()
-                            ->withFilename(fn ($resource) => $resource::getModelLabel() . '-' . date('Y-m-d'))
-                            ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)                    
-                    ]),
+                    ExportBulkAction::make()
                 ]),
             ]);
     }
