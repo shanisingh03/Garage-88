@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\CarMakerResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CarMakerResource\RelationManagers;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class CarMakerResource extends Resource
 {
@@ -60,9 +62,10 @@ class CarMakerResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                // Tables\Actions\BulkActionGroup::make([
-                //     Tables\Actions\DeleteBulkAction::make(),
-                // ]),
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                    ExportBulkAction::make()
+                ]),
             ]);
     }
 

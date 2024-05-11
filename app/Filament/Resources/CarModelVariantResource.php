@@ -25,7 +25,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CarModelVariantResource\Pages;
 use App\Filament\Resources\CarModelVariantResource\RelationManagers;
-
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class CarModelVariantResource extends Resource
 {
@@ -129,6 +130,7 @@ class CarModelVariantResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    ExportBulkAction::make()
                 ]),
             ]);
     }
