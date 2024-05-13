@@ -37,6 +37,8 @@
     <!-- Main custom css -->
     <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet" media="screen">
 
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     @yield('styles')
 </head>
 

@@ -4237,3 +4237,28 @@ header.main-header .header-sticky.active{
         width: 335px;
     }    
 }
+
+.btn-store {
+	color: #777777;
+	min-width: 200px;
+	padding: 12px 20px !important;
+	border-color: #dddddd !important;
+  }
+  
+  .btn-store:focus, 
+  .btn-store:hover {
+	color: #ffffff !important;
+	background-color: #ECF63D;
+	border-color: #ECF63D !important;
+  }
+  
+  .btn-store .btn-label, 
+  .btn-store .btn-caption {
+	display: block;
+	text-align: left;
+	line-height: 1;
+  }
+  
+  .btn-store .btn-caption {
+	font-size: 20px;
+  }

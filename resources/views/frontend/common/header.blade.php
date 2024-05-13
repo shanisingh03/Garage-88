@@ -13,10 +13,10 @@
                     <!--Menu Start-->
                     <div class="collapse navbar-collapse main-menu">
                         <ul class="navbar-nav mr-auto" id="menu">
-                            <li class="nav-items"><a class="nav-link active" href="about-us.html">Home</a></li>
-                            <li class="nav-items"><a class="nav-link" href="about-us.html">About Us</a></li>
-                            <li class="nav-items"><a class="nav-link" href="services.html">Services</a></li>
-                            <li class="nav-items"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                            <li class="nav-items"><a class="nav-link {{ (Route::currentRouteName() == 'welcome') ? 'active' : ''}}" href="{{ route('welcome') }}">Home</a></li>
+                            <li class="nav-items"><a class="nav-link {{ (Route::currentRouteName() == 'about') ? 'active' : ''}}" href="{{ route('about') }}">About Us</a></li>
+                            <li class="nav-items"><a class="nav-link {{ (Route::currentRouteName() == 'services') ? 'active' : ''}}" href="{{route('services')}}">Services</a></li>
+                            <li class="nav-items"><a class="nav-link {{ (Route::currentRouteName() == 'contact') ? 'active' : ''}}" href="{{route('contact')}}">Contact Us</a></li>
                         </ul>
                     </div>
                     <div class="navbar-toggle"></div>

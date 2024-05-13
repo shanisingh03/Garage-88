@@ -38,8 +38,13 @@
                             <li><a href="#">About Us</a></li>
                             <li><a href="#">Contact Us</a></li>
                             <li><a href="#">Our Work</a></li>
-                            <li><a href="#">Owr</a></li>
-                            <li><a href="#">Team</a></li>
+                            <li>
+                                <a href="#" class="btn btn-store">
+                                    <span class="fa fa-android fa-3x pull-left"></span> 
+                                    <span class="btn-label">Download from</span>
+                                    <span class="btn-caption">Google Play</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <!-- Footer About us End -->
@@ -49,11 +54,17 @@
                     <div class="footer-links">
                         <h2>Quick Links</h2>
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">News & Blogs</a></li>
+                            {{-- <li><a href="#">Home</a></li> --}}
                             <li><a href="#">Services</a></li>
                             <li><a href="#">Terms & Condition</a></li>
                             <li><a href="#">Privacy Policy</a></li>
+                            <li>
+                                <a href="#" class="btn btn-store">
+                                    <span class="fa fa-apple fa-3x pull-left"></span> 
+                                    <span class="btn-label">Download from</span>
+                                    <span class="btn-caption">App Store</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <!-- Footer Links End -->
@@ -78,7 +89,7 @@
                             <div class="icon-box">
                                 <i class="fa-solid fa-location-dot"></i>
                             </div>
-                            <p>20 Cooper Square, New York, <br>NY 10003, USA</p>
+                            <p>Tuli Business House 8,  <br>Waddhamna, Nagpur,<br> Maharashtra 440023</p>
                         </div>
                     </div>
                     <!-- Footer Contact Box End -->
