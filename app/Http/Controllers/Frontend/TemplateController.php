@@ -41,6 +41,17 @@ class TemplateController extends Controller
     {
         return view('frontend.services');
     }
+    
+    /**
+     * Service Details Page Of Frontend
+     * @param Nill
+     * @return View
+     * @author Shani Singh
+     */
+    public function getServiceDetails()
+    {
+        return view('frontend.service-details');
+    }
 
     /**
      * Contact Page Of Frontend
