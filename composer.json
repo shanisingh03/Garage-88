@@ -16,6 +16,7 @@
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "laravel/vapor-core": "^2.37",
         "psr/simple-cache": "2.0",
         "pxlrbt/filament-excel": "^2.3",
         "shuvroroy/filament-spatie-laravel-health": "^2.0",

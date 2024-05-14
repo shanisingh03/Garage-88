@@ -1,0 +1,29 @@
+id: 61396
+name: Garage-App
+environments:
+    production:
+        domain: garage88.in
+        memory: 1024
+        cli-memory: 512
+        runtime: 'php-8.3:al2'
+        database: garage88-production
+        storage: garage88-production-files
+        build:
+            - 'composer install --no-dev'
+            - 'php artisan event:cache'
+            - 'npm ci && npm run build && rm -rf node_modules'
+        deploy:
+            - 'php artisan migrate --force'
+    staging:
+        domain: staging.garage88.in
+        memory: 1024
+        cli-memory: 512
+        runtime: 'php-8.3:al2'
+        database: garage-staging
+        storage: garage88-staging-files
+        build:
+            - 'composer install --no-dev'
+            - 'php artisan event:cache'
+            - 'npm ci && npm run build && rm -rf node_modules'
+        deploy:
+            - 'php artisan migrate --force'
