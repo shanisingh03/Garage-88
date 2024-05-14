@@ -35,9 +35,9 @@
                     <div class="footer-links">
                         <h2>About Us</h2>
                         <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Our Work</a></li>
+                            <li><a href="{{route('about')}}">About Us</a></li>
+                            <li><a href="#">Book Appointment</a></li>
+                            <li><a href="{{route('contact')}}">Contact Us</a></li>
                             <li>
                                 <a href="#" class="btn btn-store">
                                     <span class="fa fa-android fa-3x pull-left"></span> 
@@ -54,8 +54,7 @@
                     <div class="footer-links">
                         <h2>Quick Links</h2>
                         <ul>
-                            {{-- <li><a href="#">Home</a></li> --}}
-                            <li><a href="#">Services</a></li>
+                            <li><a href="{{route('services')}}">Services</a></li>
                             <li><a href="#">Terms & Condition</a></li>
                             <li><a href="#">Privacy Policy</a></li>
                             <li>
