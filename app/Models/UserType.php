@@ -9,7 +9,7 @@ class UserType extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'status'];
+    protected $fillable = ['name','description', 'status'];
 
     public function active()
     {
