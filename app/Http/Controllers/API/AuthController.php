@@ -15,6 +15,7 @@ use App\Http\Requests\API\Auth\RegistrationOtpRequest;
 use App\Http\Requests\API\Auth\ResendOtpRequest;
 use App\Http\Requests\API\Auth\UpdatePasswordRequest;
 use App\Http\Requests\API\Auth\VerifyOtpRequest;
+use App\Notifications\Auth\OtpNotification;
 use Carbon\Carbon;
 use Valorin\Random\Random;
 
@@ -196,7 +197,18 @@ class AuthController extends Controller
     public function resendOtpForUser(ResendOtpRequest $request)
     {
         try {
-            // TODO: Write Login For Resending OTP
+            // TODO: Write Logic For Resending OTP
+            $user = User::where('uuid', $request->uuid)->first();
+
+            if (!$user) {
+                return response()->json([
+                    'status' => false,
+                    'message' => "Invalid Request!",
+                ], 500);
+            }
+
+            // Resend The OTP Via Mail
+            $user->notify(new OtpNotification($user));
 
             return response()->json([
                 'status' => true,
@@ -224,7 +236,9 @@ class AuthController extends Controller
             $user->update([
                 'otp' => Random::otp(6)
             ]);
-            // TODO: SEND SMS For OTP
+
+            // TODO: SEND EMAIL For OTP
+            $user->notify(new OtpNotification($user));
 
             return response()->json([
                 'status' => true,
@@ -271,7 +285,8 @@ class AuthController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'OTP Verified successfully!'
+                'message' => 'OTP Verified successfully!',
+                'token' => $user->createToken($user->id)->plainTextToken
             ],200);
 
         } catch (\Throwable $th) {
@@ -299,7 +314,7 @@ class AuthController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'OTP Resend Successfully!!'
+                'message' => 'Password Updated Successfully!!'
             ],200);
         } catch (\Throwable $th) {
             return response()->json([
