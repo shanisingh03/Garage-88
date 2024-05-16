@@ -25,7 +25,7 @@
                     <!-- blog image start -->
                     <div class="post-featured-image">
                         <figure class="image-anime">
-                            <a href="#"><img src="{{ asset('frontend/images/post-1.jpg') }}" alt=""></a>
+                            <a href="#"><img src="{{ Storage::disk('s3')->url('frontend/images/post-1.jpg') }}" alt=""></a>
                         </figure>
                     </div>
                     <!-- blog image end -->
@@ -47,7 +47,7 @@
                     <!-- blog image start -->
                     <div class="post-featured-image">
                         <figure class="image-anime">
-                            <a href="#"><img src="{{ asset('frontend/images/post-2.jpg') }}" alt=""></a>
+                            <a href="#"><img src="{{ Storage::disk('s3')->url('frontend/images/post-2.jpg') }}" alt=""></a>
                         </figure>
                     </div>
                     <!-- blog image end -->
@@ -69,7 +69,7 @@
                     <!-- blog image start -->
                     <div class="post-featured-image">
                         <figure class="image-anime">
-                            <a href="#"><img src="{{ asset('frontend/images/post-3.jpg') }}" alt=""></a>
+                            <a href="#"><img src="{{ Storage::disk('s3')->url('frontend/images/post-3.jpg') }}" alt=""></a>
                         </figure>
                     </div>
                     <!-- blog image end -->

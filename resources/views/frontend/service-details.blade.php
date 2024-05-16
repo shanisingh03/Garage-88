@@ -12,7 +12,7 @@
                     <!-- service featured image start -->
                     <div class="service-featured-image wow fadeInUp" data-wow-delay="0.1s">
                         <figure class="image-anime">
-                            <img src="{{asset('frontend/images/service-3.jpg')}}" alt="">
+                            <img src="{{Storage::disk('s3')->url('frontend/images/service-3.jpg')}}" alt="">
                         </figure>
                     </div>
                     <!-- service featured image end -->
@@ -32,7 +32,7 @@
                         <!-- service related image start -->
                         <div class="service-img">
                             <figure>
-                                <img src="{{asset('frontend/images/service-2.jpg')}}" alt="">
+                                <img src="{{Storage::disk('s3')->url('frontend/images/service-2.jpg')}}" alt="">
                             </figure>
                         </div>
                         <!-- service related image end -->
@@ -75,7 +75,7 @@
                         <!--  Contact Box Start -->
                         <div class="header-contact-box wow fadeInUp" data-wow-delay="0.1s">
                             <div class="contact-icon-box">
-                                <img src="{{asset('frontend/images/icon-location.svg')}}" alt="">
+                                <img src="{{Storage::disk('s3')->url('frontend/images/icon-location.svg')}}" alt="">
                             </div>
 
                             <div class="header-contact-info">
@@ -88,7 +88,7 @@
                         <!--  Contact Box Start -->
                         <div class="header-contact-box wow fadeInUp" data-wow-delay="0.2s">
                             <div class="contact-icon-box">
-                                <img src="{{asset('frontend/images/icon-phone.svg')}}" alt="">
+                                <img src="{{Storage::disk('s3')->url('frontend/images/icon-phone.svg')}}" alt="">
                             </div>
 
                             <div class="header-contact-info">
@@ -102,7 +102,7 @@
                         <!--  Contact Box Start -->
                         <div class="header-contact-box wow fadeInUp" data-wow-delay="0.3s">
                             <div class="contact-icon-box">
-                                <img src="{{asset('frontend/images/icon-watch.svg')}}" alt="">
+                                <img src="{{Storage::disk('s3')->url('frontend/images/icon-watch.svg')}}" alt="">
                             </div>
 
                             <div class="header-contact-info">
@@ -117,7 +117,7 @@
 
                             <div class="get-started-img">
                                 <figure>
-                                    <img src="{{asset('frontend/images/get-started-bg')}}-img.jpg" alt="">
+                                    <img src="{{Storage::disk('s3')->url('frontend/images/get-started-bg')}}-img.jpg" alt="">
                                 </figure>
                             </div>
 
@@ -160,7 +160,7 @@
                     <div class="benefit-service-box wow fadeInUp" data-wow-delay="0.2s">
                         <!-- service icon start -->
                         <div class="service-icon">
-                            <img src="{{asset('frontend/images/benefit-service-1')}}.svg" alt="">
+                            <img src="{{Storage::disk('s3')->url('frontend/images/benefit-service-1')}}.svg" alt="">
                         </div>
                         <!-- service icon end -->
                         <div class="service-body-content">
@@ -176,7 +176,7 @@
                     <div class="benefit-service-box wow fadeInUp" data-wow-delay="0.4s">
                         <!-- service icon start -->
                         <div class="service-icon">
-                            <img src="{{asset('frontend/images/benefit-service-2')}}.svg" alt="">
+                            <img src="{{Storage::disk('s3')->url('frontend/images/benefit-service-2')}}.svg" alt="">
                         </div>
                         <!-- service icon end -->
 
@@ -195,7 +195,7 @@
                     <div class="benefit-service-box wow fadeInUp" data-wow-delay="0.6s">
                         <!-- service icon start -->
                         <div class="service-icon">
-                            <img src="{{asset('frontend/images/benefit-service-3')}}.svg" alt="">
+                            <img src="{{Storage::disk('s3')->url('frontend/images/benefit-service-3')}}.svg" alt="">
                         </div>
                         <!-- service icon end -->
 
@@ -214,7 +214,7 @@
                     <div class="benefit-service-box wow fadeInUp" data-wow-delay="0.8s">
                         <!-- service icon start -->
                         <div class="service-icon">
-                            <img src="{{asset('frontend/images/benefit-service-4')}}.svg" alt="">
+                            <img src="{{Storage::disk('s3')->url('frontend/images/benefit-service-4')}}.svg" alt="">
                         </div>
                         <!-- service icon end -->
 

@@ -14,7 +14,7 @@
     <title>{{ config('app.name', 'Garage88') }} | @yield('title')</title>
 
     <!-- Favicon Icon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend/images/favicon.png') }} ">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ Storage::disk('s3')->url('frontend/images/favicon.png') }} ">
 
     <!-- Google Fonts css-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -47,7 +47,7 @@
     <div class="preloader">
         <div class="loading-container">
             <div class="loading"></div>
-            <div id="loading-icon"><img src="{{ asset('frontend/images/loader.svg') }}" alt=""></div>
+            <div id="loading-icon"><img src="{{ Storage::disk('s3')->url('frontend/images/loader.svg') }}" alt=""></div>
         </div>
     </div>
     <!-- Preloader End -->

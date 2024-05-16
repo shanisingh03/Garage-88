@@ -12,7 +12,7 @@
                     <div class="work-box wow fadeInUp" data-wow-delay="0.1s">
                         <div class="work-img">
                             <figure>
-                                <img src="{{asset('frontend/images/service-1.jpg')}}" alt="img">
+                                <img src="{{Storage::disk('s3')->url('frontend/images/service-1.jpg')}}" alt="img">
                             </figure>
 
                             <h3>Oil Changes</h3>
@@ -32,7 +32,7 @@
                     <div class="work-box wow fadeInUp" data-wow-delay="0.2s">
                         <div class="work-img">
                             <figure>
-                                <img src="{{asset('frontend/images/service-2.jpg')}}" alt="img">
+                                <img src="{{Storage::disk('s3')->url('frontend/images/service-2.jpg')}}" alt="img">
                             </figure>
 
                             <h3>Tire Balancing</h3>
@@ -51,7 +51,7 @@
                     <div class="work-box wow fadeInUp" data-wow-delay="0.3s">
                         <div class="work-img">
                             <figure>
-                                <img src="{{asset('frontend/images/service-3.jpg')}}" alt="img">
+                                <img src="{{Storage::disk('s3')->url('frontend/images/service-3.jpg')}}" alt="img">
                             </figure>
 
                             <h3>Brake Inspections</h3>
@@ -70,7 +70,7 @@
                     <div class="work-box wow fadeInUp" data-wow-delay="0.4s">
                         <div class="work-img">
                             <figure>
-                                <img src="{{asset('frontend/images/service-4.jpg')}}" alt="img">
+                                <img src="{{Storage::disk('s3')->url('frontend/images/service-4.jpg')}}" alt="img">
                             </figure>
 
                             <h3>Engine Diagnostics</h3>
@@ -89,7 +89,7 @@
                     <div class="work-box wow fadeInUp" data-wow-delay="0.5s">
                         <div class="work-img">
                             <figure>
-                                <img src="{{asset('frontend/images/service-5.jpg')}}" alt="img">
+                                <img src="{{Storage::disk('s3')->url('frontend/images/service-5.jpg')}}" alt="img">
                             </figure>
 
                             <h3>Oil Changes</h3>
@@ -108,7 +108,7 @@
                     <div class="work-box wow fadeInUp" data-wow-delay="0.6s">
                         <div class="work-img">
                             <figure>
-                                <img src="{{asset('frontend/images/service-6.jpg')}}" alt="img">
+                                <img src="{{Storage::disk('s3')->url('frontend/images/service-6.jpg')}}" alt="img">
                             </figure>
 
                             <h3>Tire Balancing</h3>
@@ -127,7 +127,7 @@
                     <div class="work-box wow fadeInUp" data-wow-delay="0.7s">
                         <div class="work-img">
                             <figure>
-                                <img src="{{asset('frontend/images/service-7.jpg')}}" alt="img">
+                                <img src="{{Storage::disk('s3')->url('frontend/images/service-7.jpg')}}" alt="img">
                             </figure>
 
                             <h3>Brake Inspections</h3>
@@ -146,7 +146,7 @@
                     <div class="work-box wow fadeInUp" data-wow-delay="0.8s">
                         <div class="work-img">
                             <figure>
-                                <img src="{{asset('frontend/images/service-8.jpg')}}" alt="img">
+                                <img src="{{Storage::disk('s3')->url('frontend/images/service-8.jpg')}}" alt="img">
                             </figure>
 
                             <h3>Engine Diagnostics</h3>

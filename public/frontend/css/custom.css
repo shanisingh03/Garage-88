@@ -625,7 +625,7 @@ header.main-header .header-sticky.active{
 
 .hero{
 	padding: 180px 0;
-	background: url("../images/hero.jpg") no-repeat center center;
+	background: url("https://garage88-staging-files.s3.amazonaws.com/frontend/images/hero.jpg") no-repeat center center;
 	background-size: cover;
 	min-height: 100%;
 	position: relative;
@@ -1060,7 +1060,7 @@ header.main-header .header-sticky.active{
 
 .dry-clean-section{
 	padding: 100px 0;
-	background: url('../images/how-it-work-bg.jpg') no-repeat center center;
+	background: url('https://garage88-staging-files.s3.amazonaws.com/frontend/images/how-it-work-bg.jpg') no-repeat center center;
 	background-size: cover;
 	position: relative;
 }

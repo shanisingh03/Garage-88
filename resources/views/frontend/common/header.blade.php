@@ -5,7 +5,7 @@
             <div class="container">
                 <!-- Logo Start -->
                 <a class="navbar-brand" href="{{route('welcome')}}">
-                    <img src="{{ asset('frontend/images/logo.svg') }}" alt="Logo">
+                    <img src="{{ Storage::disk('s3')->url('frontend/images/logo.svg') }}" alt="Logo">
                 </a>
                 <!-- Logo End -->
 
