@@ -21,6 +21,7 @@
         "pxlrbt/filament-excel": "^2.3",
         "shuvroroy/filament-spatie-laravel-health": "^2.0",
         "valorin/random": "^0.5.0",
+        "webbingbrasil/filament-copyactions": "^3.0",
         "z3d0x/filament-logger": "^0.7.1"
     },
     "require-dev": {
