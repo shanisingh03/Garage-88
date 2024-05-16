@@ -10,18 +10,21 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\ActionGroup;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\RelationManagers;
+use App\Models\UserType;
+use Webbingbrasil\FilamentCopyActions\Forms\Actions\CopyAction;
 
 class UserResource extends Resource
 {
@@ -44,8 +47,15 @@ class UserResource extends Resource
                 ->columns(2)
                 ->collapsible()
                 ->schema([
+                    TextInput::make('uuid')
+                    ->label('User UUID')
+                    ->suffixAction(CopyAction::make())
+                    ->readOnly()
+                    ->hiddenOn('create'),
+
                     TextInput::make('first_name')->required(),
                     TextInput::make('last_name')->required(),
+                    
                     TextInput::make('business_name')->hidden(function (callable $get) {
                         if (($get('user_type') == 3) || ($get('user_type') == 4)) {
                             return false;
@@ -53,22 +63,30 @@ class UserResource extends Resource
                             return true;
                         }
                     }),
+
                     TextInput::make('email')->email()->required()->autocomplete(false),
+
                     TextInput::make('password')
+                    ->required(fn (string $operation): bool => $operation === 'create')
                     ->password()
                     ->revealable()
                     ->autocomplete(false)
-                    ->hiddenOn('edit'),
-                    TextInput::make('mobile_number')->tel(),
+                    ->hiddenOn(['edit', 'view']),
+
+                    TextInput::make('mobile_number')->tel()
+                    ->required(),
+
                     TextInput::make('gst_number'),
+                    
                     Select::make('user_type')
-                    ->options([
-                        '1' => 'Admin',
-                        '2' => 'Customer',
-                        '3' => 'Garage',
-                        '4' => 'Supplier'
-                    ]),
-                    Select::make('roles')->relationship('roles', 'name')
+                    ->label('User Type')
+                    ->options(UserType::all()->pluck('name', 'id'))
+                    ->required(),
+
+                    Select::make('roles')
+                    ->label('Role')
+                    ->relationship('roles', 'name')
+                    ->required()
                 ]),
 
                 // Section For Garage Information

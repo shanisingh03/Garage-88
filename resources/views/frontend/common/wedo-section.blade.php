@@ -25,7 +25,7 @@
                 <div class="cta-box wow fadeInUp" data-wow-delay="0.25s">
                     <div class="cta-img">
                         <figure>
-                            <img src="{{ asset('frontend/images/what-we-do-1.jpg') }}" alt="">
+                            <img src="{{ Storage::disk('s3')->url('frontend/images/what-we-do-1.jpg') }}" alt="">
                         </figure>
                     </div>
 
@@ -43,7 +43,7 @@
                 <div class="cta-box wow fadeInUp" data-wow-delay="0.5s">
                     <div class="cta-img">
                         <figure>
-                            <img src="{{ asset('frontend/images/what-we-do-2.jpg') }}" alt="">
+                            <img src="{{ Storage::disk('s3')->url('frontend/images/what-we-do-2.jpg') }}" alt="">
                         </figure>
                     </div>
 
@@ -61,7 +61,7 @@
                 <div class="cta-box wow fadeInUp" data-wow-delay="0.75s">
                     <div class="cta-img">
                         <figure>
-                            <img src="{{ asset('frontend/images/what-we-do-3.jpg') }}" alt="">
+                            <img src="{{ Storage::disk('s3')->url('frontend/images/what-we-do-3.jpg') }}" alt="">
                         </figure>
                     </div>
 
@@ -79,7 +79,7 @@
                 <div class="cta-box wow fadeInUp" data-wow-delay="1s">
                     <div class="cta-img">
                         <figure>
-                            <img src="{{ asset('frontend/images/what-we-do-4.jpg') }}" alt="">
+                            <img src="{{ Storage::disk('s3')->url('frontend/images/what-we-do-4.jpg') }}" alt="">
                         </figure>
                     </div>
 

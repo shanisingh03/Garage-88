@@ -33,7 +33,7 @@
                     <!-- Contact Box Start -->
                     <div class="header-contact-box wow fadeInUp" data-wow-delay="0.2s">
                         <div class="contact-icon-box">
-                            <img src="{{asset('frontend/images/icon-location.svg')}}" alt="">
+                            <img src="{{Storage::disk('s3')->url('frontend/images/icon-location.svg')}}" alt="">
                         </div>
 
                         <div class="header-contact-info">
@@ -48,7 +48,7 @@
                     <!-- Contact Box Start -->
                     <div class="header-contact-box wow fadeInUp" data-wow-delay="0.4s">
                         <div class="contact-icon-box">
-                            <img src="{{asset('frontend/images/icon-phone.svg')}}" alt="">
+                            <img src="{{Storage::disk('s3')->url('frontend/images/icon-phone.svg')}}" alt="">
                         </div>
 
                         <div class="header-contact-info">
@@ -64,7 +64,7 @@
                     <!-- Contact Box Start -->
                     <div class="header-contact-box wow fadeInUp" data-wow-delay="0.6s">
                         <div class="contact-icon-box">
-                            <img src="{{asset('frontend/images/icon-watch.svg')}}" alt="">
+                            <img src="{{Storage::disk('s3')->url('frontend/images/icon-watch.svg')}}" alt="">
                         </div>
 
                         <div class="header-contact-info">

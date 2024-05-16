@@ -13,11 +13,11 @@
                 <div class="cleaning-secvices-left">
                     <div class="cleaning-secvices-img">
                         <figure class="image-anime reveal">
-                            <img src="{{asset('frontend/images/about-img-1.jpg')}}" alt="">
+                            <img src="{{Storage::disk('s3')->url('frontend/images/about-img-1.jpg')}}" alt="">
                         </figure>
 
                         <figure class="image-anime reveal">
-                            <img src="{{asset('frontend/images/about-img-2.jpg')}}" alt="">
+                            <img src="{{Storage::disk('s3')->url('frontend/images/about-img-2.jpg')}}" alt="">
                         </figure>
                     </div>
                     <!-- Cleaning Services Counter Start -->
@@ -107,7 +107,7 @@
                 <!-- We Make Image Start -->
                 <div class="we-make-image">
                     <figure class="image-anime reveal">
-                        <img src="{{asset('frontend/images/auto-repair-img.jpg')}}" alt="">
+                        <img src="{{Storage::disk('s3')->url('frontend/images/auto-repair-img.jpg')}}" alt="">
                     </figure>
                 </div>
                 <!-- We Make Image End -->
@@ -137,7 +137,7 @@
                 <!-- service box start -->
                 <div class="our-service-item wow fadeInUp" data-wow-delay="0.1s">
                     <div class="icon-box">
-                        <img src="{{asset('frontend/images/icon-service-1.svg')}}" alt="">
+                        <img src="{{Storage::disk('s3')->url('frontend/images/icon-service-1.svg')}}" alt="">
                     </div>
                     <h2>Timing Belt</h2>
                 </div>
@@ -148,7 +148,7 @@
                 <!-- service box start -->
                 <div class="our-service-item wow fadeInUp" data-wow-delay="0.2s">
                     <div class="icon-box">
-                        <img src="{{asset('frontend/images/icon-service-2.svg')}}" alt="">
+                        <img src="{{Storage::disk('s3')->url('frontend/images/icon-service-2.svg')}}" alt="">
                     </div>
                     <h2>Steering</h2>
                 </div>
@@ -159,7 +159,7 @@
                 <!-- service box start -->
                 <div class="our-service-item wow fadeInUp" data-wow-delay="0.3s">
                     <div class="icon-box">
-                        <img src="{{asset('frontend/images/icon-service-3.svg')}}" alt="">
+                        <img src="{{Storage::disk('s3')->url('frontend/images/icon-service-3.svg')}}" alt="">
                     </div>
                     <h2>Car Diagnostics</h2>
                 </div>
@@ -170,7 +170,7 @@
                 <!-- service box start -->
                 <div class="our-service-item wow fadeInUp" data-wow-delay="0.4s">
                     <div class="icon-box">
-                        <img src="{{asset('frontend/images/icon-service-4.svg')}}" alt="">
+                        <img src="{{Storage::disk('s3')->url('frontend/images/icon-service-4.svg')}}" alt="">
                     </div>
                     <h2>Clutch Replace</h2>
                 </div>
@@ -181,7 +181,7 @@
                 <!-- service box start -->
                 <div class="our-service-item wow fadeInUp" data-wow-delay="0.5s">
                     <div class="icon-box">
-                        <img src="{{asset('frontend/images/icon-service-5.svg')}}" alt="">
+                        <img src="{{Storage::disk('s3')->url('frontend/images/icon-service-5.svg')}}" alt="">
                     </div>
                     <h2>Batteries</h2>
                 </div>
@@ -192,7 +192,7 @@
                 <!-- service box start -->
                 <div class="our-service-item wow fadeInUp" data-wow-delay="0.6s">
                     <div class="icon-box">
-                        <img src="{{asset('frontend/images/icon-service-6.svg')}}" alt="">
+                        <img src="{{Storage::disk('s3')->url('frontend/images/icon-service-6.svg')}}" alt="">
                     </div>
                     <h2>Brake Repair</h2>
                 </div>
@@ -203,7 +203,7 @@
                 <!-- service box start -->
                 <div class="our-service-item wow fadeInUp" data-wow-delay="0.7s">
                     <div class="icon-box">
-                        <img src="{{asset('frontend/images/icon-service-7.svg')}}" alt="">
+                        <img src="{{Storage::disk('s3')->url('frontend/images/icon-service-7.svg')}}" alt="">
                     </div>
                     <h2>Engine Repair</h2>
                 </div>
@@ -214,7 +214,7 @@
                 <!-- service box start -->
                 <div class="our-service-item wow fadeInUp" data-wow-delay="0.8s">
                     <div class="icon-box">
-                        <img src="{{asset('frontend/images/icon-service-8.svg')}}" alt="">
+                        <img src="{{Storage::disk('s3')->url('frontend/images/icon-service-8.svg')}}" alt="">
                     </div>
                     <h2>Tire Repair</h2>
                 </div>
@@ -257,7 +257,7 @@
                 <div class="our-team-box wow fadeInUp" data-wow-delay="0.2s">
                     <div class="our-team-img">
                         <figure class="image-anime">
-                            <img src="{{asset('frontend/images/team-1.jpg')}}" alt="">
+                            <img src="{{Storage::disk('s3')->url('frontend/images/team-1.jpg')}}" alt="">
                         </figure>
                     </div>
                     <div class="our-team-content">
@@ -273,7 +273,7 @@
                 <div class="our-team-box wow fadeInUp" data-wow-delay="0.4s">
                     <div class="our-team-img">
                         <figure class="image-anime">
-                            <img src="{{asset('frontend/images/team-2.jpg')}}" alt="">
+                            <img src="{{Storage::disk('s3')->url('frontend/images/team-2.jpg')}}" alt="">
                         </figure>
                     </div>
                     <div class="our-team-content">
@@ -289,7 +289,7 @@
                 <div class="our-team-box wow fadeInUp" data-wow-delay="0.6s">
                     <div class="our-team-img">
                         <figure class="image-anime">
-                            <img src="{{asset('frontend/images/team-3.jpg')}}" alt="">
+                            <img src="{{Storage::disk('s3')->url('frontend/images/team-3.jpg')}}" alt="">
                         </figure>
                     </div>
                     <div class="our-team-content">
@@ -305,7 +305,7 @@
                 <div class="our-team-box wow fadeInUp" data-wow-delay="0.8s">
                     <div class="our-team-img">
                         <figure class="image-anime">
-                            <img src="{{asset('frontend/images/team-4.jpg')}}" alt="">
+                            <img src="{{Storage::disk('s3')->url('frontend/images/team-4.jpg')}}" alt="">
                         </figure>
                     </div>
                     <div class="our-team-content">

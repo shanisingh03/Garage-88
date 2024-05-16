@@ -8,7 +8,7 @@
         <div class="container">
             <div class="row">
                 <div class="error-page-image wow fadeInUp" data-wow-delay="0.25s">
-                    <img src="{{asset('frontend/images/404-error-img.png')}}" alt="">
+                    <img src="{{Storage::disk('s3')->url('frontend/images/404-error-img.png')}}" alt="">
                 </div>
                 <div class="error-page-content">
                     <div class="error-page-content-heading">

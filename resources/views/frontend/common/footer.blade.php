@@ -9,7 +9,7 @@
                     <div class="footer-about">
                         <!-- Footer About Logo Start -->
                         <div class="footer-logo">
-                            <img src="{{ asset('frontend/images/logo.svg') }}" alt="">
+                            <img src="{{ Storage::disk('s3')->url('frontend/images/logo.svg') }}" alt="">
                         </div>
                         <!-- Footer About Logo End -->
                         <!-- Footer About Content Start -->

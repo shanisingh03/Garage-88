@@ -6,7 +6,7 @@
                 <!-- Appointment Content Section Start -->
                 <div class="make-appointment-content wow fadeInUp">
                     <div class="icon-box">
-                        <img src="{{ asset('frontend/images/schedule-img.svg') }}" alt="">
+                        <img src="{{ Storage::disk('s3')->url('frontend/images/schedule-img.svg') }}" alt="">
                     </div>
 
                     <div class="make-appointment-title">

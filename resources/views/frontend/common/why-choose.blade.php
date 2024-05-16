@@ -16,7 +16,7 @@
                 <!-- Why Choose us Item Start -->
                 <div class="why-choose-us-item wow fadeInUp" data-wow-delay="0.2s">
                     <div class="icon-box">
-                        <img src="{{ asset('frontend/images/icon-wcu-1.svg') }}" alt="">
+                        <img src="{{ Storage::disk('s3')->url('frontend/images/icon-wcu-1.svg') }}" alt="">
                     </div>
 
                     <h3>Expertise and Experience</h3>
@@ -28,7 +28,7 @@
                 <!-- Why Choose us Item Start -->
                 <div class="why-choose-us-item wow fadeInUp" data-wow-delay="0.4s">
                     <div class="icon-box">
-                        <img src="{{ asset('frontend/images/icon-wcu-2.svg') }}" alt="">
+                        <img src="{{ Storage::disk('s3')->url('frontend/images/icon-wcu-2.svg') }}" alt="">
                     </div>
 
                     <h3>Shuttle Service Available</h3>
@@ -40,7 +40,7 @@
                 <!-- Why Choose us Item Start -->
                 <div class="why-choose-us-item wow fadeInUp" data-wow-delay="0.6s">
                     <div class="icon-box">
-                        <img src="{{ asset('frontend/images/icon-wcu-3.svg') }}" alt="">
+                        <img src="{{ Storage::disk('s3')->url('frontend/images/icon-wcu-3.svg') }}" alt="">
                     </div>
 
                     <h3>Skilled Technicians</h3>
@@ -52,7 +52,7 @@
                 <!-- Why Choose us Item Start -->
                 <div class="why-choose-us-item wow fadeInUp" data-wow-delay="0.8s">
                     <div class="icon-box">
-                        <img src="{{ asset('frontend/images/icon-wcu-4.svg') }}" alt="">
+                        <img src="{{ Storage::disk('s3')->url('frontend/images/icon-wcu-4.svg') }}" alt="">
                     </div>
 
                     <h3>Finncing Available</h3>
@@ -64,7 +64,7 @@
                 <!-- Why Choose us Item Start -->
                 <div class="why-choose-us-item wow fadeInUp" data-wow-delay="1s">
                     <div class="icon-box">
-                        <img src="{{ asset('frontend/images/icon-wcu-5.svg') }}" alt="">
+                        <img src="{{ Storage::disk('s3')->url('frontend/images/icon-wcu-5.svg') }}" alt="">
                     </div>
 
                     <h3>Vacuum And Hand Car Wash</h3>
@@ -76,7 +76,7 @@
                 <!-- Why Choose us Item Start -->
                 <div class="why-choose-us-item wow fadeInUp" data-wow-delay="1.2s">
                     <div class="icon-box">
-                        <img src="{{ asset('frontend/images/icon-wcu-6.svg') }}" alt="">
+                        <img src="{{ Storage::disk('s3')->url('frontend/images/icon-wcu-6.svg') }}" alt="">
                     </div>
 
                     <h3>Free Pick Up & Drop</h3>

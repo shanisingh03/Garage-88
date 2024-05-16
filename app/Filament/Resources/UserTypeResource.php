@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserTypeResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserTypeResource\RelationManagers;
+use Filament\Forms\Components\Textarea;
 
 class UserTypeResource extends Resource
 {
@@ -35,6 +36,7 @@ class UserTypeResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')->required(),
+                Textarea::make('description')->cols(3),
                 Select::make('status')->options([
                     1 => 'Active',
                     0 => 'In Active'
@@ -47,6 +49,7 @@ class UserTypeResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')->searchable()->sortable(),
+                TextColumn::make('description')->searchable()->sortable(),
                 IconColumn::make('status')
                 ->boolean()
                 ->trueIcon('heroicon-o-check-badge')

@@ -17,7 +17,7 @@
                     <!-- Image Box Section Start -->
                     <div class="image-box-wrapper wow fadeInUp" data-wow-delay="0.25s">
                         <figure>
-                            <img src="{{ asset('frontend/images/icon-address.svg') }}" alt="map-icon">
+                            <img src="{{ Storage::disk('s3')->url('frontend/images/icon-address.svg') }}" alt="map-icon">
                         </figure>
                         <div class="img-box-content">
                             <h3>We are Located in</h3>
@@ -29,7 +29,7 @@
                     <!-- Image Box Section Start -->
                     <div class="image-box-wrapper wow fadeInUp" data-wow-delay="0.5s">
                         <figure>
-                            <img src="{{ asset('frontend/images/icon-call.svg') }}" alt="phone-icon">
+                            <img src="{{ Storage::disk('s3')->url('frontend/images/icon-call.svg') }}" alt="phone-icon">
                         </figure>
                         <div class="img-box-content">
                             <h3>contact no</h3>
@@ -48,13 +48,13 @@
                 <div class="about-us-video">
                     <div class="about-image">
                         <figure class="reveal image-anime">
-                            <img src="{{ asset('frontend/images/about-us-img.jpg') }}" alt="">
+                            <img src="{{ Storage::disk('s3')->url('frontend/images/about-us-img.jpg') }}" alt="">
                         </figure>
                     </div>
 
                     <div class="video-play-button">
                         <a href="https://www.youtube.com/watch?v=Y-x0efG1seA" class="popup-video">
-                            <img src="{{ asset('frontend/images/play.svg') }}" alt="">
+                            <img src="{{ Storage::disk('s3')->url('frontend/images/play.svg') }}" alt="">
                         </a>
                     </div>
                 </div>

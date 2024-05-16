@@ -17,7 +17,7 @@
                 <!-- Dry Clean Img Section Start -->
                 <div class="dry-clean-img">
                     <figure class="reveal image-anime">
-                        <img src="{{ asset('frontend/images/how-it-work.jpg') }}" alt="">
+                        <img src="{{ Storage::disk('s3')->url('frontend/images/how-it-work.jpg') }}" alt="">
                     </figure>
                 </div>
                 <!-- Dry Clean Img Section End -->

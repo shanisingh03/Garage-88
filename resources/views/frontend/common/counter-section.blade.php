@@ -6,7 +6,7 @@
                 <!-- Counter Box Section Start -->
                 <div class="counter-box-wrapper wow fadeInUp">
                     <div class="counter-icon">
-                        <img src="{{ asset('frontend/images/icon-counter-1.svg') }}" alt="">
+                        <img src="{{ Storage::disk('s3')->url('frontend/images/icon-counter-1.svg') }}" alt="">
                     </div>
 
                     <div class="counter-box-content">
@@ -21,7 +21,7 @@
                 <!-- Counter Box Section Start -->
                 <div class="counter-box-wrapper wow fadeInUp" data-wow-delay="0.25s">
                     <div class="counter-icon">
-                        <img src="{{ asset('frontend/images/icon-counter-2.svg') }}" alt="">
+                        <img src="{{ Storage::disk('s3')->url('frontend/images/icon-counter-2.svg') }}" alt="">
                     </div>
 
                     <div class="counter-box-content">
@@ -36,7 +36,7 @@
                 <!-- Counter Box Section Start -->
                 <div class="counter-box-wrapper wow fadeInUp" data-wow-delay="0.5s">
                     <div class="counter-icon">
-                        <img src="{{ asset('frontend/images/icon-counter-3.svg') }}" alt="">
+                        <img src="{{ Storage::disk('s3')->url('frontend/images/icon-counter-3.svg') }}" alt="">
                     </div>
 
                     <div class="counter-box-content">
@@ -51,7 +51,7 @@
                 <!-- Counter Box Section Start -->
                 <div class="counter-box-wrapper wow fadeInUp" data-wow-delay="0.75s">
                     <div class="counter-icon">
-                        <img src="{{ asset('frontend/images/icon-counter-4.svg') }}" alt="">
+                        <img src="{{ Storage::disk('s3')->url('frontend/images/icon-counter-4.svg') }}" alt="">
                     </div>
 
                     <div class="counter-box-content">
