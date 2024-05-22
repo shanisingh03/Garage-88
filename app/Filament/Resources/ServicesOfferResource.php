@@ -49,7 +49,7 @@ class ServicesOfferResource extends Resource
     {
         return $table
         ->columns([
-            TextColumn::make('carService')->sortable()->searchable(),
+            TextColumn::make('carService.name')->sortable()->searchable(),
             TextColumn::make('starting_price')->sortable()->searchable(),
             TextColumn::make('estimated_time')->sortable()->searchable(),
             IconColumn::make('status')
