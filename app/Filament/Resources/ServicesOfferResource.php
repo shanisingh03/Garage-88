@@ -23,7 +23,7 @@ class ServicesOfferResource extends Resource
 {
     protected static ?string $model = ServicesOffer::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Garage';
 
     public static function form(Form $form): Form
     {

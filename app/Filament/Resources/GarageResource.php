@@ -2,35 +2,37 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\GarageResource\Pages;
-use App\Filament\Resources\GarageResource\RelationManagers;
-use App\Models\Garage;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\User;
 use Filament\Tables;
+use App\Models\Garage;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Tables\Columns\TextColumn;
-use Webbingbrasil\FilamentCopyActions\Forms\Actions\CopyAction;
-use Filament\Tables\Filters\SelectFilter;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\GarageResource\Pages;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\GarageResource\RelationManagers;
+use Webbingbrasil\FilamentCopyActions\Forms\Actions\CopyAction;
 
 class GarageResource extends Resource
 {
     protected static ?string $model = Garage::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Garage';
     
     public static function form(Form $form): Form
     {
         return $form
         ->schema([
-                Forms\Components\TextInput::make('uuid')
-                ->suffixAction(CopyAction::make())
-                ->readOnly()
-                ->hiddenOn('create'),
+                Select::make('uuid')
+                ->label('Select Garage User')
+                ->relationship(name: 'user', titleAttribute: 'business_name')
+                ->required(),
                 Forms\Components\TextInput::make('display_name')->required(),
                 Forms\Components\TextInput::make('registered_name')->required(),
                 Forms\Components\TextInput::make('contact_number')->required(),

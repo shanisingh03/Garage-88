@@ -6,10 +6,12 @@ use Filament\Forms;
 use App\Models\User;
 use Filament\Tables;
 use Filament\Forms\Set;
+use App\Models\UserType;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
@@ -23,7 +25,6 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\RelationManagers;
-use App\Models\UserType;
 use Webbingbrasil\FilamentCopyActions\Forms\Actions\CopyAction;
 
 class UserResource extends Resource
@@ -31,8 +32,6 @@ class UserResource extends Resource
     protected static ?string $model = User::class;
 
     protected static ?string $navigationGroup = 'Users';
-
-    protected static ?string $navigationIcon = 'heroicon-o-users';
 
     protected static ?string $navigationLabel = 'Users List';
 
@@ -138,6 +137,22 @@ class UserResource extends Resource
             ])
             ->actions([
                 ActionGroup::make([
+                    Action::make('updateStatus')
+                    ->icon('heroicon-m-exclamation-circle')
+                    ->form([
+                        Select::make('status')
+                            ->label('Status')
+                            ->options([
+                                0 => "Inactive",
+                                1 => "Active",
+
+                            ])
+                            ->required(),
+                    ])
+                    ->action(function (array $data, User $record): void {
+                        $record->status = $data['status'];
+                        $record->save();
+                    }),
                     Tables\Actions\EditAction::make()
                     ->visible(function (User $user) {
                         if (auth()->user()->user_type == 1) {

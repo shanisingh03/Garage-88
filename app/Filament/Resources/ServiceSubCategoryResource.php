@@ -25,7 +25,7 @@ class ServiceSubCategoryResource extends Resource
 {
     protected static ?string $model = ServiceSubCategory::class;
 
-    protected static ?string $navigationGroup = 'Category';
+    protected static ?string $navigationGroup = 'Service Master';
     
     protected static ?string $navigationLabel = 'Service Sub Categories';
 

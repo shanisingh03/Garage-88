@@ -48,11 +48,19 @@ class AppServiceProvider extends ServiceProvider
         Filament::serving(function () {
             Filament::registerNavigationGroups([
                 NavigationGroup::make()
+                    ->label('Users')
+                    ->icon('heroicon-o-users')
+                    ->collapsed(),
+                NavigationGroup::make()
                     ->label('Car Make & Model')
                     ->icon('heroicon-o-lifebuoy')
                     ->collapsed(),
                 NavigationGroup::make()
-                    ->label('Category')
+                    ->label('Garage')
+                    ->icon('heroicon-o-building-storefront')
+                    ->collapsed(),
+                NavigationGroup::make()
+                    ->label('Service Master')
                     ->icon('heroicon-o-tag')
                     ->collapsed(),
             ]);

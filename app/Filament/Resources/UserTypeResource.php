@@ -25,8 +25,6 @@ class UserTypeResource extends Resource
 
     protected static ?string $navigationGroup = 'Users';
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-minus';
-
     protected static ?string $navigationLabel = 'Users Type';
 
     protected static ?string $recordTitleAttribute = 'User Type';

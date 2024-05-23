@@ -37,10 +37,11 @@ use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 class CarServiceResource extends Resource
 {
     protected static ?string $model = CarService::class;
-    
-    protected static ?string $navigationLabel = 'Car Services';
 
-    protected static ?string $navigationIcon = 'heroicon-o-queue-list';
+    protected static ?string $navigationGroup = 'Service Master';
+    
+    protected static ?string $navigationLabel = 'Services';
+
 
     public static function form(Form $form): Form
     {

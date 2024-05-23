@@ -22,7 +22,7 @@ class GarageStaffResource extends Resource
 {
     protected static ?string $model = GarageStaff::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Garage';
 
     public static function form(Form $form): Form
     {

@@ -35,7 +35,7 @@ class Garage extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'uuid', 'uuid');
+        return $this->belongsTo(User::class, 'uuid', 'uuid')->where('user_type', 3);
     }
     
     protected static function boot()

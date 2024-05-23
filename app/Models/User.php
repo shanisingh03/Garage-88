@@ -89,4 +89,5 @@ class User extends Authenticatable implements HasName, FilamentUser
     {
         return $this->hasOne(Garage::class, 'uuid', 'uuid');
     }
+
 }
