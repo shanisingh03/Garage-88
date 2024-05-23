@@ -19,6 +19,8 @@ Route::post('/register/resend-otp', [AuthController::class, 'resendOtpForUser'])
 // Forgot Password
 Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
 Route::post('/forgot-password/verify-otp', [AuthController::class, 'verifyOtp']);
+
+// Update Password
 Route::post('/update-password', [AuthController::class, 'updatePassword'])->middleware('auth:sanctum');
 
 Route::get('/user', function (Request $request) {
