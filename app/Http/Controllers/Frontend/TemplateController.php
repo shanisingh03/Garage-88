@@ -15,8 +15,8 @@ class TemplateController extends Controller
      */
     public function welcome()
     {
-        // return view('frontend.home');
-        return view('errors.503');
+        return view('frontend.home');
+        // return view('errors.503');
     }
 
 
