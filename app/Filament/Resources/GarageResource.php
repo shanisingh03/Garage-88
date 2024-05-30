@@ -52,7 +52,7 @@ class GarageResource extends Resource
                 TextInput::make('contact_number')->required(),
                 TextInput::make('contact_email')->required(),
                 Select::make('address_line_1')
-                    ->label('Search')
+                    ->label('Address Line 1')
                     ->searchable()
                     ->reactive()
                     ->dehydrated(false)
@@ -64,21 +64,16 @@ class GarageResource extends Resource
                             ->toArray();
                     })
                     ->afterStateUpdated(function ($state, $set) {
-                        /** @var \Geocoder\Provider\GoogleMaps\Model\GoogleAddress $result */
+                        /** @var \Geocoder\Provider\GoogleMapsPlaces\Model\GooglePlace $result */
                         $result = '';
                         if ($state) {
                             $result = app('geocoder')->geocode($state)->get()->first();
                             $coords = $result->getCoordinates();
-                            
-                            // $set('street', $result->getStreetName());
-                            // $set('street_number', $result->getStreetNumber());
-                            $set('city', $result->getLocality());
                             $set('pin_code', $result->getPostalCode());
                             $set('latitude', $coords->getLatitude());
                             $set('longitude', $coords->getLongitude());
                         }
                     }),
-                // Forms\Components\TextInput::make('address_line_1')->required(),
                 TextInput::make('address_line_2')->nullable(),
                 TextInput::make('city')->required(),
                 TextInput::make('state')->required(),

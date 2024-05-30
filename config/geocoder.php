@@ -3,6 +3,7 @@
 use Geocoder\Provider\Chain\Chain;
 use Geocoder\Provider\GeoPlugin\GeoPlugin;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
+use Geocoder\Provider\GoogleMapsPlaces;
 use Http\Client\Curl\Client;
 
 return [
@@ -57,8 +58,7 @@ return [
     */
     'providers' => [
         Chain::class => [
-            GoogleMaps::class => [
-                env('GOOGLE_MAPS_LOCALE', 'us'),
+            Geocoder\Provider\GoogleMapsPlaces\GoogleMapsPlaces::class => [
                 env('GOOGLE_MAPS_API_KEY'),
             ],
             GeoPlugin::class  => [],

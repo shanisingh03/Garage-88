@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e7e4afa9bd3e20295269c4279c5ad387",
+    "content-hash": "4fa66568681230639e47909139b42d12",
     "packages": [
         {
             "name": "althinect/filament-spatie-roles-permissions",
@@ -2534,6 +2534,65 @@
                 "source": "https://github.com/geocoder-php/geo-plugin-provider/tree/4.3.0"
             },
             "time": "2022-07-30T10:48:32+00:00"
+        },
+        {
+            "name": "geocoder-php/google-maps-places-provider",
+            "version": "1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/geocoder-php/google-maps-places-provider.git",
+                "reference": "9ef702663c80c85bbb4b51bbf10566ced26ddb62"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/geocoder-php/google-maps-places-provider/zipball/9ef702663c80c85bbb4b51bbf10566ced26ddb62",
+                "reference": "9ef702663c80c85bbb4b51bbf10566ced26ddb62",
+                "shasum": ""
+            },
+            "require": {
+                "geocoder-php/common-http": "^4.0",
+                "php": "^7.4 || ^8.0",
+                "willdurand/geocoder": "^4.0"
+            },
+            "provide": {
+                "geocoder-php/provider-implementation": "1.0"
+            },
+            "require-dev": {
+                "geocoder-php/provider-integration-tests": "^1.0",
+                "php-http/curl-client": "^2.2",
+                "php-http/message": "^1.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Geocoder\\Provider\\GoogleMapsPlaces\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "atymic",
+                    "email": "atymicq@gmail.com"
+                }
+            ],
+            "description": "Geocoder Google Maps Places adapter",
+            "homepage": "http://geocoder-php.org/Geocoder/",
+            "support": {
+                "source": "https://github.com/geocoder-php/google-maps-places-provider/tree/1.4.1"
+            },
+            "time": "2023-07-09T14:05:05+00:00"
         },
         {
             "name": "geocoder-php/google-maps-provider",

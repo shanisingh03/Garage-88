@@ -13,6 +13,7 @@
         "barryvdh/laravel-dompdf": "^2.1",
         "bezhansalleh/filament-exceptions": "^2.1",
         "filament/filament": "^3.2",
+        "geocoder-php/google-maps-places-provider": "^1.4",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
