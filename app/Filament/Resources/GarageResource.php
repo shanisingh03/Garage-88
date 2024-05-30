@@ -18,7 +18,9 @@ use App\Filament\Resources\GarageResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\GarageResource\RelationManagers;
 use Webbingbrasil\FilamentCopyActions\Forms\Actions\CopyAction;
-
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Repeater;
 class GarageResource extends Resource
 {
     protected static ?string $model = Garage::class;
@@ -30,25 +32,82 @@ class GarageResource extends Resource
         return $form
         ->schema([
                 Select::make('uuid')
-                ->label('Select Garage User')
-                ->relationship(name: 'user', titleAttribute: 'business_name')
-                ->required(),
-                Forms\Components\TextInput::make('display_name')->required(),
-                Forms\Components\TextInput::make('registered_name')->required(),
-                Forms\Components\TextInput::make('contact_number')->required(),
-                Forms\Components\TextInput::make('contact_email')->required(),
-                Forms\Components\TextInput::make('address_line_1')->required(),
-                Forms\Components\TextInput::make('address_line_2')->nullable(),
-                Forms\Components\TextInput::make('city')->required(),
-                Forms\Components\TextInput::make('state')->required(),
-                Forms\Components\TextInput::make('country')->required(),
-                Forms\Components\TextInput::make('pin_code')->required(),
-                Forms\Components\TextInput::make('latitude')->numeric()->nullable(),
-                Forms\Components\TextInput::make('longitude')->numeric()->nullable(),
-                Forms\Components\TextInput::make('service_days_time')->nullable(),
-                Forms\Components\TextInput::make('cgst')->numeric()->nullable(),
-                Forms\Components\TextInput::make('sgst')->numeric()->nullable(),
-                Forms\Components\Toggle::make('status')->default(true),
+                    ->label('Select Garage User')
+                    ->relationship(name: 'user', titleAttribute: 'business_name')
+                    ->required()
+                    ->reactive() // Make it reactive to handle change events
+                    ->afterStateUpdated(function (callable $set, $state) {
+                        if ($state) {
+                            $user = User::where('uuid', $state)->first();
+                            if ($user) {
+                                $set('display_name', $user->business_name);
+                                $set('registered_name', $user->first_name);
+                                $set('contact_number', $user->mobile_number);
+                                $set('contact_email', $user->email);
+                            }
+                        }
+                    }),
+                TextInput::make('display_name')->required(),
+                TextInput::make('registered_name')->required(),
+                TextInput::make('contact_number')->required(),
+                TextInput::make('contact_email')->required(),
+                Select::make('address_line_1')
+                    ->label('Address Line 1')
+                    ->searchable()
+                    ->reactive()
+                    ->getSearchResultsUsing(function ($query) {
+                        return app('geocoder')->geocode($query)->get()
+                            ->mapWithKeys(fn ($result) => [
+                                $result->getFormattedAddress() => $result->getFormattedAddress()
+                            ])
+                            ->toArray();
+                    })
+                    ->afterStateUpdated(function ($state, $set) {
+                        /** @var \Geocoder\Provider\GoogleMapsPlaces\Model\GooglePlace $result */
+                        $result = '';
+                        if ($state) {
+                            $result = app('geocoder')->geocode($state)->get()->first();
+                            $coords = $result->getCoordinates();
+                            $set('pin_code', $result->getPostalCode());
+                            $set('latitude', $coords->getLatitude());
+                            $set('longitude', $coords->getLongitude());
+                        }
+                    }),
+                TextInput::make('address_line_2')->nullable(),
+                TextInput::make('city')->required(),
+                TextInput::make('state')->required(),
+                TextInput::make('country')->required(),
+                TextInput::make('pin_code')->required(),
+                TextInput::make('latitude')->numeric()->nullable(),
+                TextInput::make('longitude')->numeric()->nullable(),
+                Repeater::make('service_days_time')
+                    ->schema([
+                        Select::make('day')
+                            ->options([
+                                'monday' => 'Monday',
+                                'tuesday' => 'Tuesday',
+                                'wednesday' => 'Wednesday',
+                                'thursday' => 'Thursday',
+                                'friday' => 'Friday',
+                                'saturday' => 'Saturday',
+                                'sunday' => 'Sunday',
+                            ])
+                            ->required()
+                            ->label('Day of the Week'),
+                        TextInput::make('from')
+                            ->label('From')
+                            ->type('time')
+                            ->required(),
+                        TextInput::make('to')
+                            ->label('To')
+                            ->type('time')
+                            ->required(),
+                    ])
+                    ->minItems(1)
+                    ->label('Service Days and Time'),
+                TextInput::make('cgst')->numeric()->nullable(),
+                TextInput::make('sgst')->numeric()->nullable(),
+                Toggle::make('status')->default(true),
             ]);
     }
 

@@ -87,7 +87,7 @@ class User extends Authenticatable implements HasName, FilamentUser
 
     public function garage()
     {
-        return $this->hasOne(Garage::class, 'uuid', 'uuid');
+        return $this->hasMany(Garage::class, 'uuid', 'uuid');
     }
 
 }

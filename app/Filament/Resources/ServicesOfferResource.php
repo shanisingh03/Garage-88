@@ -18,6 +18,8 @@ use Forms\Components\BelongsToSelect;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
 
 class ServicesOfferResource extends Resource
 {
@@ -27,12 +29,12 @@ class ServicesOfferResource extends Resource
 
     public static function form(Form $form): Form
     {
-        $carServiceIds = CarService::pluck('id')->toArray();
+        $carServiceOptions = CarService::pluck('name', 'id')->toArray();
         return $form
             ->schema([               
-                Forms\Components\Select::make('service_id')
-                    ->label('Service ID')
-                    ->options(array_combine($carServiceIds, $carServiceIds)) // Use the IDs as both option values and labels
+                Select::make('service_id')
+                    ->label('Service')
+                    ->options($carServiceOptions)
                     ->required(),
                 TextInput::make('starting_price')
                     ->type('number')
@@ -40,7 +42,7 @@ class ServicesOfferResource extends Resource
                 TextInput::make('estimated_time')
                     ->type('number')
                     ->required(),
-                Forms\Components\Toggle::make('status')
+                Toggle::make('status')
                     ->default(true),
             ]);
     }
