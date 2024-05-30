@@ -55,7 +55,6 @@ class GarageResource extends Resource
                     ->label('Address Line 1')
                     ->searchable()
                     ->reactive()
-                    ->dehydrated(false)
                     ->getSearchResultsUsing(function ($query) {
                         return app('geocoder')->geocode($query)->get()
                             ->mapWithKeys(fn ($result) => [
