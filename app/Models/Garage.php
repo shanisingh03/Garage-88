@@ -27,6 +27,7 @@ class Garage extends Model
         'cgst',
         'sgst',
         'status',
+        'location'
     ];
 
     protected $casts = [
@@ -37,15 +38,55 @@ class Garage extends Model
     {
         return $this->belongsTo(User::class, 'uuid', 'uuid')->where('user_type', 3);
     }
-    
-    protected static function boot()
+
+    protected $appends = [
+        'location',
+    ];
+
+    public function getLocationAttribute(): array
     {
-        parent::boot();
+        return [
+            "lat" => (float)$this->latitude,
+            "lng" => (float)$this->longitude,
+        ];
+    }
     
-        static::creating(function ($model) {
-            $userUuid = auth()->user() ? auth()->user()->uuid : null;
-            $model->uuid = $userUuid;
-        });
+    public function setLocationAttribute(?array $location): void
+    {
+        if (is_array($location))
+        {
+            $this->attributes['latitude'] = $location['lat'];
+            $this->attributes['longitude'] = $location['lng'];
+            $this->attributes['location'] = $location['formatted_address'];
+            // unset($this->attributes['location']);
+        }
+    }
+
+    /**
+     * Get the lat and lng attribute/field names used on this table
+     *
+     * Used by the Filament Google Maps package.
+     *
+     * @return string[]
+     */
+    public static function getLatLngAttributes(): array
+    {
+        return [
+            'lat' => 'latitude',
+            'lng' => 'longitude',
+        ];
+    }
+
+   /**
+    * Get the name of the computed location attribute
+    *
+    * Used by the Filament Google Maps package.
+    *
+    * @return string
+    */
+    public static function getComputedLocation(): string
+    {
+        return 'location';
     }
     
 }

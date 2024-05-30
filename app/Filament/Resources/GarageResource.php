@@ -10,17 +10,21 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Repeater;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Cheesegrits\FilamentGoogleMaps\Fields\Map;
 use App\Filament\Resources\GarageResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Cheesegrits\FilamentGoogleMaps\Fields\Geocomplete;
 use App\Filament\Resources\GarageResource\RelationManagers;
 use Webbingbrasil\FilamentCopyActions\Forms\Actions\CopyAction;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\Repeater;
+
 class GarageResource extends Resource
 {
     protected static ?string $model = Garage::class;
@@ -31,56 +35,101 @@ class GarageResource extends Resource
     {
         return $form
         ->schema([
+
+            Section::make('Business Information')
+            ->description("Business Name, Email, Mobile,  GST Charges")
+            ->columns(2)
+            ->collapsible()
+            ->schema([
                 Select::make('uuid')
-                    ->label('Select Garage User')
-                    ->relationship(name: 'user', titleAttribute: 'business_name')
-                    ->required()
-                    ->reactive() // Make it reactive to handle change events
-                    ->afterStateUpdated(function (callable $set, $state) {
-                        if ($state) {
-                            $user = User::where('uuid', $state)->first();
-                            if ($user) {
-                                $set('display_name', $user->business_name);
-                                $set('registered_name', $user->first_name);
-                                $set('contact_number', $user->mobile_number);
-                                $set('contact_email', $user->email);
-                            }
+                ->label('Select Garage User')
+                ->relationship(name: 'user', titleAttribute: 'business_name')
+                ->searchable()
+                ->preload()
+                ->required()
+                ->reactive() // Make it reactive to handle change events
+                ->afterStateUpdated(function (callable $set, $state) {
+                    if ($state) {
+                        $user = User::where('uuid', $state)->first();
+                        if ($user) {
+                            $set('display_name', $user->business_name);
+                            $set('registered_name', $user->business_name);
+                            $set('contact_number', $user->mobile_number);
+                            $set('contact_email', $user->email);
                         }
-                    }),
+                    }
+                }),
                 TextInput::make('display_name')->required(),
                 TextInput::make('registered_name')->required(),
                 TextInput::make('contact_number')->required(),
                 TextInput::make('contact_email')->required(),
-                Select::make('address_line_1')
-                    ->label('Address Line 1')
-                    ->searchable()
-                    ->reactive()
-                    ->getSearchResultsUsing(function ($query) {
-                        return app('geocoder')->geocode($query)->get()
-                            ->mapWithKeys(fn ($result) => [
-                                $result->getFormattedAddress() => $result->getFormattedAddress()
-                            ])
-                            ->toArray();
-                    })
-                    ->afterStateUpdated(function ($state, $set) {
-                        /** @var \Geocoder\Provider\GoogleMapsPlaces\Model\GooglePlace $result */
-                        $result = '';
-                        if ($state) {
-                            $result = app('geocoder')->geocode($state)->get()->first();
-                            $coords = $result->getCoordinates();
-                            $set('pin_code', $result->getPostalCode());
-                            $set('latitude', $coords->getLatitude());
-                            $set('longitude', $coords->getLongitude());
-                        }
-                    }),
+                TextInput::make('cgst')->numeric()->nullable()->suffix('%'),
+                TextInput::make('sgst')->numeric()->nullable()->suffix('%'),
+            ]),
+
+            Section::make('Address Information')
+            ->description("Address, City, State etc.")
+            ->columns(2)
+            ->collapsible()
+            ->schema([
+                Geocomplete::make('location')
+                ->isLocation()
+                ->reverseGeocode([
+                    'city'   => '%L',
+                    'pin_code'    => '%z',
+                    'state'  => '%A1',
+                    'country'  => '%C',
+                    'address_line_2' => '%n',
+                    'address_line_1' => '%S'
+                ])
+                ->countries(['IN']) // restrict autocomplete results to these countries
+                ->debug() // output the results of reverse geocoding in the browser console, useful for figuring out symbol formats
+                ->updateLatLng()
+                ->maxLength(2048)
+                ->placeholder('Start typing an address ...')
+                ->geolocate() // add a suffix button which requests and reverse geocodes the device location
+                ->geolocateIcon('heroicon-o-map'),
+
+                TextInput::make('address_line_1')->nullable(),
                 TextInput::make('address_line_2')->nullable(),
                 TextInput::make('city')->required(),
                 TextInput::make('state')->required(),
                 TextInput::make('country')->required(),
                 TextInput::make('pin_code')->required(),
-                TextInput::make('latitude')->numeric()->nullable(),
-                TextInput::make('longitude')->numeric()->nullable(),
-                Repeater::make('service_days_time')
+                TextInput::make('latitude')->numeric()->readOnly(),
+                TextInput::make('longitude')->numeric()->readOnly(),
+            ]),
+                // Select::make('address_line_1')
+                // ->label('Address Line 1')
+                // ->searchable()
+                // ->reactive()
+                // ->getSearchResultsUsing(function ($query) {
+                //     return app('geocoder')->geocode($query)->get()
+                //         ->mapWithKeys(fn ($result) => [
+                //             $result->getFormattedAddress() => $result->getFormattedAddress()
+                //         ])
+                //         ->toArray();
+                // })
+                // ->afterStateUpdated(function ($state, $set) {
+                //     /** @var \Geocoder\Provider\GoogleMapsPlaces\Model\GooglePlace $result */
+                //     $result = '';
+                //     if ($state) {
+                //         $result = app('geocoder')->geocode($state)->get()->first();
+                //         $coords = $result->getCoordinates();
+
+                //         $set('address_line_2', $result->getStreetNumber());
+                //         $set('city', $result->getLocality());
+                //         $set('pin_code', $result->getPostalCode());
+                //         $set('latitude', $coords->getLatitude());
+                //         $set('longitude', $coords->getLongitude());
+                //     }
+                // }),
+                
+                Section::make('Service Days')
+                ->description("Each Day Information")
+                ->collapsible()
+                ->schema([
+                    Repeater::make('service_days_time')
                     ->schema([
                         Select::make('day')
                             ->options([
@@ -103,10 +152,12 @@ class GarageResource extends Resource
                             ->type('time')
                             ->required(),
                     ])
+                    ->collapsible()
                     ->minItems(1)
+                    ->addActionLabel('Add More')
                     ->label('Service Days and Time'),
-                TextInput::make('cgst')->numeric()->nullable(),
-                TextInput::make('sgst')->numeric()->nullable(),
+                ]),
+                
                 Toggle::make('status')->default(true),
             ]);
     }
