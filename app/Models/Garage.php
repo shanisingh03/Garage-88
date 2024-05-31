@@ -48,6 +48,7 @@ class Garage extends Model
         return [
             "lat" => (float)$this->latitude,
             "lng" => (float)$this->longitude,
+            "formatted_address" => $this->attributes['location'],
         ];
     }
     

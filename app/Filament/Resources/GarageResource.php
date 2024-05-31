@@ -88,7 +88,17 @@ class GarageResource extends Resource
                 ->maxLength(2048)
                 ->placeholder('Start typing an address ...')
                 ->geolocate() // add a suffix button which requests and reverse geocodes the device location
-                ->geolocateIcon('heroicon-o-map'),
+                ->geolocateIcon('heroicon-o-map')
+                ->afterStateHydrated(function (callable $set, $state, $get) {
+                    $location = $get('location');
+                    if ($location) {
+                        $set('location', [
+                            'lat' => $location['lat'],
+                            'lng' => $location['lng'],
+                            'formatted_address' => $location['formatted_address'] ?? '',
+                        ]);
+                    }
+                }),
 
                 TextInput::make('address_line_1')->nullable(),
                 TextInput::make('address_line_2')->nullable(),
