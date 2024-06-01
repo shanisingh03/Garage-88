@@ -91,11 +91,17 @@ class GarageResource extends Resource
                 ->geolocateIcon('heroicon-o-map')
                 ->afterStateHydrated(function (callable $set, $state, $get) {
                     $location = $get('location');
-                    if ($location) {
+                    if (isset($location)) {
                         $set('location', [
                             'lat' => $location['lat'],
                             'lng' => $location['lng'],
-                            'formatted_address' => $location['formatted_address'] ?? '',
+                            'formatted_address' => $location['formatted_address'],
+                        ]);
+                    } else {
+                        $set('location', [
+                            'lat' => null,
+                            'lng' => null,
+                            'formatted_address' => '',
                         ]);
                     }
                 }),
