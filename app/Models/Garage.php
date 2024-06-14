@@ -90,4 +90,9 @@ class Garage extends Model
         return 'location';
     }
     
+
+    public function staffs()
+    {
+        return $this->hasMany(GarageStaff::class, 'uuid', 'garage_uuid');
+    }
 }

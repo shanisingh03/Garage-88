@@ -20,4 +20,9 @@ class GarageStaff extends Model
         return $this->belongsTo(Garage::class, 'garage_uuid', 'uuid');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'staff_uuid', 'id');
+    }
+
 }

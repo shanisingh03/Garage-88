@@ -80,6 +80,7 @@ class UserResource extends Resource
                     Select::make('user_type')
                     ->label('User Type')
                     ->options(UserType::all()->pluck('name', 'id'))
+                    ->live()
                     ->required(),
 
                     Select::make('roles')
