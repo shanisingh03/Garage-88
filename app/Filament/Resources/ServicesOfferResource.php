@@ -2,24 +2,25 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ServicesOfferResource\Pages;
-use App\Filament\Resources\ServicesOfferResource\RelationManagers;
-use App\Models\ServicesOffer;
-use App\Models\CarService;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Garage;
+use Filament\Forms\Form;
+use App\Models\CarService;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\TextInput;
-use Forms\Components\BelongsToSelect;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Columns\IconColumn;
+use App\Models\ServicesOffer;
+use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
+use Forms\Components\BelongsToSelect;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\ServicesOfferResource\Pages;
+use App\Filament\Resources\ServicesOfferResource\RelationManagers;
 
 class ServicesOfferResource extends Resource
 {
@@ -29,19 +30,29 @@ class ServicesOfferResource extends Resource
 
     public static function form(Form $form): Form
     {
-        $carServiceOptions = CarService::pluck('name', 'id')->toArray();
         return $form
-            ->schema([               
+            ->schema([       
+                Select::make('garage_uuid')
+                    ->label('Garage')
+                    ->placeholder('Select The Garage')
+                    ->options(Garage::pluck('display_name', 'uuid'))
+                    ->searchable()
+                    ->preload()
+                    ->required(),        
                 Select::make('service_id')
                     ->label('Service')
-                    ->options($carServiceOptions)
+                    ->placeholder('Select The Service')
+                    ->options(CarService::pluck('name', 'id'))
                     ->required(),
                 TextInput::make('starting_price')
                     ->type('number')
+                    ->prefix('₹')
                     ->required(),
                 TextInput::make('estimated_time')
                     ->type('number')
+                    ->suffix('Hrs.')
                     ->required(),
+                
                 Toggle::make('status')
                     ->default(true),
             ]);
@@ -51,9 +62,10 @@ class ServicesOfferResource extends Resource
     {
         return $table
         ->columns([
+            TextColumn::make('garage.display_name')->sortable()->searchable(),
             TextColumn::make('carService.name')->sortable()->searchable(),
-            TextColumn::make('starting_price')->sortable()->searchable(),
-            TextColumn::make('estimated_time')->sortable()->searchable(),
+            TextColumn::make('starting_price')->prefix('₹ ')->sortable()->searchable(),
+            TextColumn::make('estimated_time')->suffix(' Hrs.')->sortable()->searchable(),
             IconColumn::make('status')
                 ->boolean()
                 ->trueIcon('heroicon-o-check-badge')
@@ -64,6 +76,8 @@ class ServicesOfferResource extends Resource
                 '0' => 'Inactive',
                 '1' => 'Active',
             ])->label('Status'),
+            SelectFilter::make('garage')->relationship('garage', 'display_name')->label('Garage')->searchable()->preload(),
+            SelectFilter::make('carService')->relationship('carService', 'name')->label('Service')->searchable()->preload(),
         ])
         ->actions([
             Tables\Actions\EditAction::make(),

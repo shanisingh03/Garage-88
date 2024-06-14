@@ -11,7 +11,7 @@ class ServicesOffer extends Model
     use HasFactory;
 
     protected $fillable = [
-        'uuid',
+        'garage_uuid',
         'service_id',
         'starting_price',
         'estimated_time',
@@ -24,12 +24,8 @@ class ServicesOffer extends Model
         return $this->belongsTo(CarService::class, 'service_id', 'id');
     }
 
-    protected static function boot()
+    public function garage()
     {
-        parent::boot();
-
-        static::creating(function ($model) {
-            $model->uuid = Str::uuid();
-        });
+        return $this->belongsTo(Garage::class, 'garage_uuid', 'uuid');
     }
 }

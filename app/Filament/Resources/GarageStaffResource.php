@@ -113,6 +113,7 @@ class GarageStaffResource extends Resource
                     '0' => 'Inactive',
                     '1' => 'Active',
                 ])->label('Status'),
+                SelectFilter::make('garage')->relationship('garage', 'display_name')->label('Garage')->searchable()->preload(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

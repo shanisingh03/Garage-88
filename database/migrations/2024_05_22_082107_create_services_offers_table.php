@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('services_offers', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid')->unique();
+            $table->uuid('garage_uuid')->unique();
             $table->foreignId('service_id')->constrained('car_services')->onDelete('cascade');
             $table->decimal('starting_price', 10, 2);
             $table->integer('estimated_time');
